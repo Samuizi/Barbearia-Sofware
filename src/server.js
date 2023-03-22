@@ -6,7 +6,6 @@ const mongo = require("../src/database");
 
 
 
-const port = 3333;
 const app = express();
 
 app.use(express.static(path.join(__dirname, "../views/public")));
@@ -20,6 +19,6 @@ app.use(
   })
 );
 
-app.listen(port, () => {
-  console.log(`⚡ Backend started at http://localhost:${port}`);
+app.listen(process.env.PORT, () => {
+  console.log(`⚡ Backend started at http://localhost:${process.env.PORT}`);
 });

@@ -1,9 +1,10 @@
 const mongoose = require('mongoose');
+const dotenv = require('dotenv').config();
 
 async function main() {
   mongoose.set('strictQuery', true);
-  await mongoose.connect("mongodb://localhost:27017/sqldados");
-  console.log('Conectado com o mongodb!')
+  await mongoose.connect(process.env.BASE_BANCO);
+  console.log('📦 Conectado com o mongodb!')
 }
 
 main().catch((err) => console.log(err));
