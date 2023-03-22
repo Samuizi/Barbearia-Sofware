@@ -1,33 +1,27 @@
 const form = document.querySelector('form');
 
-function cadastrar() {
+function Login() {
 form.addEventListener('submit',function(event){
     event.preventDefault();//enpede o envio do formulario
 
     //obtendo valores dos inputs
 
-    const nome = form.elements.nome.value;
-    const idade = form.elements.idade.value;
     const email = form.elements.email.value;
     const senha = form.elements.senha.value;
 
     //objeto de valores
     const usuario = {
-        nome: nome,
-        idade: idade,
         email: email,
-        senha: senha,
+        password: senha,
     }
 
     //enviar meu objeto via ajax
     const xhr = new XMLHttpRequest();
-    xhr.open('POST','/cadastro');
+    xhr.open('POST','http://localhost:3333/logar');
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.onload =function() {
         if (xhr.status === 200){
-            alert('Usuário cadastrado com sucesso!');
-        }else{
-            alert('Ocorreu um erro ao cadastrar o usuário.')
+            alert(this.responseText);
         }
     };
     xhr.send(JSON.stringify(usuario))

@@ -1,21 +1,11 @@
 const mongoose = require('mongoose');
 
-
-// Conexão com banco de dados
-
-function connectToDatabese() {
-    mongoose.connect(
-        process.env.DATABASE_URL,
-        {
-    useNewUrlParser : true,
-    useUnifiedTopology : true,
-    }
-);
-
-const db = mongoose.connection;
-db.on("error",(error) => console.log(error));
-db.once("open",() => console.log("📦 Connect to the database!"));
-
+async function main() {
+  mongoose.set('strictQuery', true);
+  await mongoose.connect("mongodb://localhost:27017/sqldados");
+  console.log('Conectado com o mongodb!')
 }
 
-module.exports = connectToDatabese;
+main().catch((err) => console.log(err));
+
+module.exports = mongoose;
