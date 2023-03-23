@@ -5,7 +5,6 @@ const bcrypt = require("bcrypt");
 
 class User {
 
-
   //Cadastrar usuário
   static async Register(req, res) {
     console.log("form ", req.body);
@@ -14,7 +13,7 @@ class User {
 
     console.log("validate register ", exists);
     if (exists) {
-      return res.status(200).json({ msg: "Email já registrado! " });
+      return res.status(200).send("Email já registrado! ");
     }
 
     const sault = await bcrypt.genSalt(12);
@@ -22,7 +21,7 @@ class User {
 
     const user = new UserModel({ name: name, age: age, email: email, password: passwordHash });
     await user.save();
-    return res.status(200).json({ msg: "Success" });
+    return res.status(200).send("Success");
   }
 
   static async login(req, res) {
@@ -31,17 +30,17 @@ class User {
     console.log("database", user);
 
     if (!user) {
-      return res.status(200).json({msg: "Erro no login"});
+      return res.status(200).send("Erro no login");
     }
 
     const validatePass = await bcrypt.compare(password, user.password);
     console.log("validate pass", validatePass);
     if(!validatePass){
-        return res.status(200).json({msg: "Erro no login"});
+        return res.status(200).send("Erro no login");
     }
 
     console.log("Usuário logado !", user);
-    return res.status(200).json({msg: "Usuário logado com sucesso!"})
+    return res.status(200).send("Usuário logado com sucesso!")
   }
 }
 
