@@ -21,14 +21,13 @@ form.addEventListener('submit',function(event){
 
     //enviar meu objeto via ajax
     const xhr = new XMLHttpRequest();
-    xhr.open('POST','http://localhost:3333/cadastro');
+    xhr.open('POST','http://localhost:3000/cadastro');
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.onload =function() {
         if (xhr.status === 200){
-            console.log(usuario);
-            alert('Usuário cadastrado com sucesso!');
+            alert(this.responseText);
         }else{
-            alert('Ocorreu um erro ao cadastrar o usuário.')
+            alert(this.responseText);
         }
     };
     xhr.send(JSON.stringify(usuario))

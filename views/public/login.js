@@ -1,8 +1,8 @@
 const form = document.querySelector('form');
 
-function Login() {
-form.addEventListener('submit',function(event){
-    event.preventDefault();//enpede o envio do formulario
+
+form.addEventListener('submit',function(evn){
+    // evn.preventDefault();//enpede o envio do formulario
 
     //obtendo valores dos inputs
 
@@ -17,7 +17,7 @@ form.addEventListener('submit',function(event){
 
     //enviar meu objeto via ajax
     const xhr = new XMLHttpRequest();
-    xhr.open('POST','http://localhost:3333/logar');
+    xhr.open('POST','http://localhost:3000/logar');
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.onload =function() {
         if (xhr.status === 200){
@@ -25,5 +25,6 @@ form.addEventListener('submit',function(event){
         }
     };
     xhr.send(JSON.stringify(usuario))
+
+    evn.preventDefault()
 });
-};

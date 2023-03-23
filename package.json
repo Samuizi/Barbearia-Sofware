@@ -19,6 +19,7 @@
   },
   "devDependencies": {
     "@types/mongoose": "^5.11.97",
+    "bcrypt": "^5.1.0",
     "eslint": "^8.36.0"
   }
 }
