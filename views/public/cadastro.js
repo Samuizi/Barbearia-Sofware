@@ -1,10 +1,8 @@
-const { aggregate } = require("../../models/User");
-
 const form = document.querySelector('form');
 
-function cadastrar() {
+
 form.addEventListener('submit',(event)=>{
-    event.preventDefault();//enpede o envio do formulario
+  
 
     //obtendo valores dos inputs
 
@@ -33,5 +31,6 @@ form.addEventListener('submit',(event)=>{
         }
     };
     xhr.send(JSON.stringify(usuario))
+    event.preventDefault();//enpede o envio do formulario
 });
-};
+

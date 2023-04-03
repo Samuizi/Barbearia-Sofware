@@ -2,6 +2,9 @@ const mongoose = require("../src/database");
 const UserModel = require("../models/User");
 const { redirect } = require("express/lib/response");
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
+
+require("dotenv").config();
 
 class User {
 
@@ -40,7 +43,11 @@ class User {
     }
 
     console.log("Usuário logado !", user);
-    return res.status(200).send("Usuário logado com sucesso!")
+    const token = await jwt.sign({user:user._id}, process.env.SECRET, {expiresIn:"10s"});
+    console.log("token", token);
+    res.cookie("token",token);
+    // res.status(200).json({msg:"Usuario Logado!" ,token:token})
+    res.redirect("/home");
   }
 }
 
