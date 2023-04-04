@@ -1,11 +1,10 @@
 const mongoose = require("../src/database");
 const UserModel = require("../models/User");
-const { redirect } = require("express/lib/response");
+const routes = require("./../src/routes");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
 require("dotenv").config();
-
 class User {
 
   //Cadastrar usuário
@@ -24,7 +23,7 @@ class User {
 
     const user = new UserModel({ name: name, age: age, email: email, password: passwordHash });
     await user.save();
-    return res.status(200).send("Success");
+    res.redirect('http://localhost:3000');
   }
 
   static async login(req, res) {
@@ -42,12 +41,9 @@ class User {
         return res.status(200).send("Erro no login");
     }
 
-    console.log("Usuário logado !", user);
+   
     const token = await jwt.sign({user:user._id}, process.env.SECRET, {expiresIn:"10s"});
-    console.log("token", token);
     res.cookie("token",token);
-    // res.status(200).json({msg:"Usuario Logado!" ,token:token})
-    res.redirect("/home");
   }
 }
 

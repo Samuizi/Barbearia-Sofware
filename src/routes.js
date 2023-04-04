@@ -1,15 +1,19 @@
 const express = require("express");
-const { json } = require("express/lib/response");
 const routes = express.Router();
 const jwt = require("jsonwebtoken");
+const cookie = require("cookie-parser")
+
 
 require("dotenv").config();
+
 
 const userController = require("../controller/userController");
 
 routes.post("/cadastro",userController.Register);
 
-routes.post("/logar", userController.login)
+routes.post("/login", userController.login);
+
+routes.use(cookie());
 
 routes.get("/home", async(req, res, next) => {
     const token = req.cookies.token;

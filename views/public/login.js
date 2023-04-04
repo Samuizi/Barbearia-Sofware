@@ -15,16 +15,18 @@ form.addEventListener('submit',(evn)=>{
         password: password,
     }
 
+    const ul = JSON.stringify(usuario);
+
     //enviar meu objeto via ajax
     const xhr = new XMLHttpRequest();
-    xhr.open('POST','http://localhost:3000/logar');
+    xhr.open('POST','http://localhost:3000/login');
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.onload = function() {
         if (xhr.status === 200){
             alert(this.responseText);
         }
     };
-    xhr.send(JSON.stringify(usuario))
+    xhr.send(ul)
 
     evn.preventDefault()
 });

@@ -3,7 +3,7 @@ const express = require("express");
 const routes = require("./routes");
 const path = require("path");
 const mongo = require("../src/database");
-const cookie = require("cookie-parser");
+
 
 
 
@@ -12,7 +12,6 @@ const app = express();
 app.use(express.static(path.join(__dirname, "../views/public")));
 app.use(express.json());
 app.use(routes);
-app.use(cookie());
 
 //read body
 app.use(
